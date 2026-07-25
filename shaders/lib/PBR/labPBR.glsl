@@ -135,14 +135,32 @@ void getPBR(inout dataPBR material, in int id){
     // Assign smoothness
     material.smoothness = min(SRPSSE.r, 0.96);
 
-    // Assign emissive
-    material.emissive = SRPSSE.a != 1 ? SRPSSE.a : 0.0;
+    #if MATERIAL_FORMAT == 0
+        // labPBR 1.3: the emissive mask is stored in the alpha channel,
+        // while the blue channel holds porosity / subsurface scattering.
 
-    // Assign porosity
-    material.porosity = SRPSSE.b < 0.252 ? SRPSSE.b * 3.984 : 0.0;
+        // Assign emissive
+        material.emissive = SRPSSE.a != 1 ? SRPSSE.a : 0.0;
 
-    // Assign SS
-    material.ss = SRPSSE.b > 0.252 ? (SRPSSE.b - 0.2509804) * 1.3350785 : 0.0;
+        // Assign porosity
+        material.porosity = SRPSSE.b < 0.252 ? SRPSSE.b * 3.984 : 0.0;
+
+        // Assign SS
+        material.ss = SRPSSE.b > 0.252 ? (SRPSSE.b - 0.2509804) * 1.3350785 : 0.0;
+    #else
+        // SEUS/Old PBR: the emissive mask is stored in the blue channel
+        // (paint blue on the specular map, e.g. Electro_s.png, to make it glow).
+        // Porosity and subsurface scattering are not part of this format.
+
+        // Assign emissive
+        material.emissive = SRPSSE.b;
+
+        // Assign porosity
+        material.porosity = 0.0;
+
+        // Assign SS
+        material.ss = 0.0;
+    #endif
 
     // Apply no vanilla AO for water
     material.ambient = normalAOH.b;
