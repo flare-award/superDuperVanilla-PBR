@@ -281,6 +281,13 @@ screen.PBR.comment = §6Physically based rendering options including PBR mode, s
         value.PBR_MODE.1 = Integrated PBR
         value.PBR_MODE.2 = Lab PBR 1.3
 
+    option.ADVANCED_MATERIALS = Advanced Materials
+    option.ADVANCED_MATERIALS.comment = Enables advanced materials. Reads the normal and specular PBR maps from your resource pack and from custom skins (for example Electro.png together with Electro_s.png). The way these maps are read depends on the selected Material Format.
+    option.MATERIAL_FORMAT = Material Format
+    option.MATERIAL_FORMAT.comment = Selects the advanced materials encoding. labPBR 1.3 reads the emissive mask from the alpha channel of the specular map. SEUS/Old PBR reads it from the blue channel, so painting blue on the _s texture makes those parts glow.
+        value.MATERIAL_FORMAT.0 = labPBR 1.3
+        value.MATERIAL_FORMAT.1 = SEUS/Old PBR
+
     option.SPECULAR_HIGHLIGHTS = Specular highlights
     option.SPECULAR_HIGHLIGHTS.comment = Enables specular highlight. Specular highlights are the approximate reflections of the sun.
 

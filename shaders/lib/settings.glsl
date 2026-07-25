@@ -117,6 +117,10 @@ const float sunPathRotation = 30.0; // Light path angle. This also affects sky a
 /// -------------------------------- /// PBR /// -------------------------------- ///
 
 #define PBR_MODE 1 // Enables PBR. Integrated PBR depends on the vanilla albedo textures to map out the materials. Resource PBR uses your resource packs' PBR, if available. Resource PBR requires latest LabPBR version! [0 1 2]
+
+// #define ADVANCED_MATERIALS // Enables advanced materials. Reads the normal and specular PBR maps from your resource pack (and from custom skins, e.g. Electro.png + Electro_s.png). When enabled, the material encoding follows the selected material format below.
+#define MATERIAL_FORMAT 1 // Advanced materials format. labPBR 1.3 reads the emissive mask from the alpha channel of the specular map, SEUS/Old PBR reads it from the blue channel (paint blue on the _s texture to make it glow). [0 1]
+
 #define SPECULAR_HIGHLIGHTS // Enables specular highlight. Specular highlights are the approximate reflections of the sun.
 #define ENVIRONMENT_PBR // Enables enviroment materials. Environment materials affects your surrounding according to your environment such as rain.
 #define SUBSURFACE_SCATTERING // Enables subsurface scattering. 
@@ -236,6 +240,9 @@ const float PHYSICS_NORMAL_STRENGTH = 0.6;
 #endif
 
 #ifdef PARALLAX_SHADOW
+#endif
+
+#ifdef ADVANCED_MATERIALS
 #endif
 
 // Precalculated constants

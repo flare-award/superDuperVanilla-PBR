@@ -199,10 +199,10 @@
 
     #include "/lib/PBR/dataStructs.glsl"
 
-    #if PBR_MODE <= 1
-        #include "/lib/PBR/integratedPBR.glsl"
-    #else
+    #if defined ADVANCED_MATERIALS || PBR_MODE >= 2
         #include "/lib/PBR/labPBR.glsl"
+    #else
+        #include "/lib/PBR/integratedPBR.glsl"
     #endif
 
     #include "/lib/lighting/complexShadingForward.glsl"
